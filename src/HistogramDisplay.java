@@ -1,5 +1,3 @@
-
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -12,12 +10,11 @@ import java.awt.*;
 
 public class HistogramDisplay extends ApplicationFrame {
 
-    public static void main(String[] args) {
-        HistogramDisplay histo = new HistogramDisplay();
-        histo.execute();
-    }
-    public HistogramDisplay() {
+    private final Histogram<String> histogram;
+
+    public HistogramDisplay(Histogram<String> histogram) {
         super("Histograma");
+        this.histogram = histogram;
         setContentPane(createPanel());
         pack();
     }
@@ -36,10 +33,9 @@ public class HistogramDisplay extends ApplicationFrame {
 
     private DefaultCategoryDataset createDataset() {
         DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-        dataSet.addValue(3,"","ulpgc.es");
-        dataSet.addValue(2,"","ull.com");
-        dataSet.addValue(5,"","gmail.com");
-        dataSet.addValue(1,"","apple.es");
+        for (String key:histogram.keySet()){
+            dataSet.addValue(histogram.get(key),"",key);
+        }
         return dataSet;
     }
 

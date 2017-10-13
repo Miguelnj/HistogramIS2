@@ -15,7 +15,8 @@ public class Main {
         histogram.increment("ull.es");
         histogram.increment("ull.es");
         histogram.increment("ull.es");
-        HistogramDisplay histo = new HistogramDisplay(histogram);
+
+        HistogramDisplay histo = new HistogramDisplay<>(histogram);
         histo.execute();
     }
 }
